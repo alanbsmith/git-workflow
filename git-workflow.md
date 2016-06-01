@@ -51,9 +51,69 @@ Now I have one commit I can submit in a PR or merge with another branch. This ma
 ![image](rebase-my-branch.png)
 
 
+#### Continuously Rebasing with Master
 
-### Merge to Staging
+If you're working on an extended feature, you may want (or need) to keep your branch up to date with the master branch as you go. This is a really good practice that ensures minimal divergence (and broken functionality) as you go. It's easier to mend small changes as you go than deal with a large divergence at the end. This also provides an opportunity to catch any ambiguous bugs or conflicts locally before they show up on master.
+The question becomes how to do this well, and there are a lot of factors to consider:
+
+* How many people people are contributing to the same repository
+* How much churn there is is the codebase
+* How many devs touch the code you're working on
+* How familiar you are with the code you're touching
+* Your own personal comfort level to deal with potential conflicts
+
+_*Some of this is tied into working as a team, which I'll talk about later._
+
+
+I like the analogy of "coming up for air" for rebasing with master. At the very least, if you can't remember the last time you rebased, you're probably drowning. Think of it as taking breaths between strokes while swimming laps. How often you come up is up to you, but it should be a rhythmic, natural part of your workflow.
+
+___* Always rebase / squash / fixup your own work first.___
+
+This is super important. Keeping all your work in a single commit and squashing keeps your work on top of the commit stack and gives you some options if something goes wrong. _This is slightly different if you're in a feature supporting role. More on that below._
+
+___TBD___ _Example of good and bad workflow_
+
+## Team Flow | working together to deliver a feature
+Often you'll work with other developers or designers to deliver a particular feature or refactor. This adds a bit more complexity into your workflow and can cause headaches if it's not managed well. I would definitely recommend having other team members adopt a similar workflow to what I've described above, or at the very least have a conversation about how you'll coordinate your work. I'll describe a bit of what I've found helpful for working on team to deliver a feature both as a feature lead, and as a supporter.
+
+#### As the Feature Lead
+There needs to be a single feature lead. This person is in charge of making sure the final work delivered is stable and high-quality, but also that main branch of work is always stable for everyone working on be feature.
+
+* Create a main branch and treat it like master.
+
+  * _This main branch should **always** be stable._ This functions as your source of truth and your state of the world. This allows everyone to rebase with this branch and always have something stable. If someone breaks something on their own branch and don't know how to fix it, they can always hop back to this branch. If you need to slowly push functionality to QA, this keeps their work stable.
+
+**Some practices for keeping the main branch stable:**
+* Continuously rebase with master
+* Everyone makes their own separate branch from this branch (including yourself)
+* Team members only add work by submitting PRs (no merge/pushing to the main branch)
+* PRs (including the team lead) are reviewed by another team member
+* All PRs should be stable (no merge conflicts with the main branch) and be a single commit.
+* Commit messages should be descriptive and helpful
+
+Your role as the feature lead is to ensure the main branch stays stable. You are the guard of this feature. This involves several things:
+* Giving thorough code reviews on all PRs and being particular about what makes it into your branch.
+  * _Large features generally do to get a thorough review before going to master, so this is your chance to catch potential bugs and clean up code._
+
+* Ensuring PRs are a single commit
+* Continuously rebasing with master for stability
+
+
+#### In a Feature Support Role
+* rebase / squash / fixup your commits first. 
+* rebase with the main branch regularly (not master)
+* submit PRs (small if possible, succinct, descriptive, and stable)
+
+
+## PR Reviews
+___TBD___
+
+* As the Reviewer
+* As the Reviewed
+
+
+## Merge to Staging
 ![image](merge-to-staging.png)
 
-### Merge to Master
+## Merge to Master
 ![image](merge-to-master.png)
